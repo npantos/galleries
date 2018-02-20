@@ -13,6 +13,7 @@ import {RegisterComponent} from './components/auth/register/register.component';
 import {AuthService} from "./shared/services/auth.service";
 import {CreateComponent} from './components/create/create.component';
 import {HttpClientModule} from "@angular/common/http";
+import {GalleriesService} from "./shared/services/galleries.service";
 
 
 
@@ -32,7 +33,8 @@ import {HttpClientModule} from "@angular/common/http";
         HttpClientModule
     ],
     providers: [
-        AuthService
+        AuthService,
+        GalleriesService
     ],
     bootstrap: [AppComponent]
 })

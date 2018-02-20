@@ -3,15 +3,21 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {Router} from "@angular/router";
+import {User} from "../../models/user";
+
 
 @Injectable()
 export class AuthService {
 
     public isAuthenticated:boolean;
+    public user;
+
 
     constructor(private http: HttpClient, private router: Router) {
-        //this.isAuthenticated = !!window.localStorage.getItem('loginToken');
-        //this.isAuthenticated = true;
+        this.isAuthenticated = !!window.localStorage.getItem('loginToken');
+        this.isAuthenticated = true;
+        this.user = JSON.parse(window.localStorage.getItem('user'));
+
     }
 
     public getRequestHeaders() {
@@ -23,8 +29,13 @@ export class AuthService {
             this.http.post('http://localhost:8000/api/login', {
                 'email': email,
                 'password': password
-            }).subscribe((data: { token: string }) => {
+            }).subscribe((data: { token: string, user: User }) => {
                 window.localStorage.setItem('loginToken', data.token);
+                window.localStorage.setItem('user', JSON.stringify(data.user));
+
+                this.user = data.user;
+                console.log("this user: ");
+                console.log(this.user);
                 this.isAuthenticated = true;
                 o.next(data.token);
                 return o.complete();
@@ -53,6 +64,8 @@ export class AuthService {
 
     logout(){
         window.localStorage.removeItem('loginToken');
+        window.localStorage.removeItem('user');
+
         this.isAuthenticated = false;
         this.router.navigateByUrl('/login');
     }

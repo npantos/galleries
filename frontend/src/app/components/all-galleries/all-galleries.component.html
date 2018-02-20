@@ -1,3 +1,13 @@
 <p>
-  all-galleries works!
+    Dobrodošao {{auth.user.first_name}} {{auth.user.last_name}}
 </p>
+
+
+<div class="row">
+    <div *ngFor="let gallery of galleries" class="card border-secondary mb-3 col-3">
+        <div class="card-header">{{gallery.title}}</div>
+        <div class="card-body">
+            <img src="{{gallery.images[0].url}}" alt="" class="img-fluid">
+        </div>
+    </div>
+</div>
