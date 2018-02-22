@@ -20,6 +20,9 @@ class Gallery extends Model {
 		})->find($id);
 	}
 
+
+
+
 	public static function getAuthorGalleries($id){
 		return self::with('user')->with(['images'], function ($q) {
 			return $q->whereNotNull('url')->orderBy('order', 'asc');
@@ -33,5 +36,9 @@ class Gallery extends Model {
 
 	public function user() {
 		return $this->belongsTo(User::class);
+	}
+
+	public function comments(){
+		return $this->hasMany(Comment::class)->orderBy('created_at', 'DESC');
 	}
 }

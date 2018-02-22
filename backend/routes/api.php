@@ -23,5 +23,7 @@ Route::post('/register','Auth\RegisterController@create');
 Route::get('/all-galleries','GalleryController@index');
 Route::get('/single-gallery/{id}','GalleryController@show');
 Route::get('/author/{id}','GalleryController@showAuthor');
+Route::get('/comments/{id}','CommentsController@show');
+Route::post('/comments','CommentsController@store');
 //Route::middleware('jwt')->get('/single-gallery/{id}','GalleryController@show');
 //Route::middleware('jwt')->post('/register','Auth\RegisterController@create');
