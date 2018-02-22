@@ -46,8 +46,13 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        //
+        return Gallery::getSingleGallery($id);
     }
+
+
+    public function showAuthor($id){
+    	return Gallery::getAuthorGalleries($id);
+	}
 
     /**
      * Show the form for editing the specified resource.

@@ -11,9 +11,11 @@ import {LoginComponent} from './components/auth/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {RegisterComponent} from './components/auth/register/register.component';
 import {AuthService} from "./shared/services/auth.service";
-import {CreateComponent} from './components/create/create.component';
 import {HttpClientModule} from "@angular/common/http";
 import {GalleriesService} from "./shared/services/galleries.service";
+import { SingleGalleryComponent } from './components/single-gallery/single-gallery.component';
+import { AuthorGalleriesComponent } from './components/author-galleries/author-galleries.component';
+import { CreateGalleryComponent } from './components/create-gallery/create-gallery.component';
 
 
 
@@ -24,7 +26,9 @@ import {GalleriesService} from "./shared/services/galleries.service";
         AllGalleriesComponent,
         LoginComponent,
         RegisterComponent,
-        CreateComponent
+        SingleGalleryComponent,
+        AuthorGalleriesComponent,
+        CreateGalleryComponent
     ],
     imports: [
         BrowserModule,

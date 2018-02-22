@@ -1,0 +1,15 @@
+<h1 class="mb-5">Create Gallery</h1>
+<form #createGalleryForm="ngForm" (ngSubmit)="create(first_name.value, last_name.value, email.value, password.value)">
+  <div class="form-group">
+    <label>Title</label>
+    <input #title name='title' min="2" max="255" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Body</label>
+    <textarea  #body name='body' max="1000" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <label>Image url</label>
+    <input #image name='image' type="text" class="form-control"><button class="btn btn-primary">+</button>
+  </div>
+

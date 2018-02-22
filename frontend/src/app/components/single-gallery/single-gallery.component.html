@@ -1,0 +1,25 @@
+<h1>{{gallery.title}}</h1>
+<em>Author: <a href="/author/{{gallery.user?.id}}">{{gallery.user?.first_name}} {{gallery.user?.last_name}}</a></em><br />
+<sub>{{gallery.created_at| date:'dd.MM.yyyy.'}}</sub>
+<p>{{gallery.body}}</p>
+
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let image of gallery.images; let index = index" [class.active]="index == 0">
+            <a href="{{image.url}}" target="_blank">
+                <img src="{{image.url}}" class="d-block w-100" alt="">
+            </a>
+        </div>
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+

@@ -3,7 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {AllGalleriesComponent} from "./components/all-galleries/all-galleries.component";
 import {LoginComponent} from "./components/auth/login/login.component";
 import {RegisterComponent} from "./components/auth/register/register.component";
-import {CreateComponent} from "./components/create/create.component";
+import {SingleGalleryComponent} from "./components/single-gallery/single-gallery.component";
+import {AuthorGalleriesComponent} from "./components/author-galleries/author-galleries.component";
+import {CreateGalleryComponent} from "./components/create-gallery/create-gallery.component";
 
 
 const appRoutes: Routes = [
@@ -17,8 +19,12 @@ const appRoutes: Routes = [
         component: AllGalleriesComponent
     },
     {
-        path: 'galleries:id',
-        component: AllGalleriesComponent
+        path: 'gallery/:id',
+        component: SingleGalleryComponent
+    },
+    {
+        path: 'author/:id',
+        component: AuthorGalleriesComponent
     },
     {
         path: 'login',
@@ -30,7 +36,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'create',
-        component: CreateComponent
+        component: CreateGalleryComponent
     },
 ];
 

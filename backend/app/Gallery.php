@@ -4,18 +4,34 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
-{
-    //
+class Gallery extends Model {
+	//
 	protected $guarded = ['id'];
 
-	public static function getAllGalleries(){
-		return self::with(['images'], function($q) {
-			return $q->whereNotNull('url');
-		})->get();
+	public static function getAllGalleries() {
+		return self::with('user')->with(['images'], function ($q) {
+			return $q->whereNotNull('url')->orderBy('order', 'asc');
+		})->take(10)->get();
 	}
 
-	public function images(){
-		return $this->hasMany(Image::class)->orderBy('order', 'asc');
+	public static function getSingleGallery($id){
+		return self::with('user')->with(['images'], function ($q) {
+			return $q->whereNotNull('url')->orderBy('order', 'asc');
+		})->find($id);
+	}
+
+	public static function getAuthorGalleries($id){
+		return self::with('user')->with(['images'], function ($q) {
+			return $q->whereNotNull('url')->orderBy('order', 'asc');
+		})->where('user_id',$id)->get();
+
+	}
+
+	public function images() {
+		return $this->hasMany(Image::class);
+	}
+
+	public function user() {
+		return $this->belongsTo(User::class);
 	}
 }
