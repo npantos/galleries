@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
 			$table->unsignedInteger('user_id');
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->unsignedInteger('gallery_id');
-			$table->foreign('gallery_id')->references('id')->on('galleries');
+			$table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
 			$table->timestamps();
         });
     }

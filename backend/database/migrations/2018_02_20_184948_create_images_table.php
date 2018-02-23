@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
 			$table->string('url');
 			$table->integer('order');
 			$table->unsignedInteger('gallery_id');
-			$table->foreign('gallery_id')->references('id')->on('galleries');
+			$table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
             $table->timestamps();
         });
     }

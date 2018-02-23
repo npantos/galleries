@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Gallery;
+use App\Image;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class GalleryController extends Controller
 {
@@ -37,8 +39,32 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+		$user = JWTAuth::parseToken()->authenticate();
+
+		$gallery = new Gallery();
+
+		$gallery->title = $request->input('title');
+		$gallery->body = $request->input('body');
+		$gallery->user_id = $user->id;
+
+		$gallery->save();
+
+		$imagesArray = $request->input('images');
+		$images = [];
+
+		foreach ($imagesArray as $image) {
+			$newImage = new Image($image);
+
+			$images[] = $newImage;
+		}
+
+		$gallery->images()->saveMany($images);
+
+		return $gallery;
+
+
+
+	}
 
     /**
      * Display the specified resource.
@@ -76,8 +102,32 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+		$gallery = Gallery::find($id);
+
+		$gallery->title = $request->input('title');
+		$gallery->body = $request->input('body');
+
+		$gallery->save();
+
+		$imagesArray = $request->input('images');
+		$images = [];
+
+		$oldImages = Image::where('gallery_id',$id);
+		$oldImages->delete();
+
+		foreach ($imagesArray as $image) {
+			$newImage = new Image($image);
+
+			$images[] = $newImage;
+		}
+
+		$gallery->images()->saveMany($images);
+
+		return $gallery;
+
+
+
+	}
 
     /**
      * Remove the specified resource from storage.
@@ -87,6 +137,9 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+		$contact = Gallery::find($id);
+		$contact->delete();
+
+		return Gallery::all();
     }
 }

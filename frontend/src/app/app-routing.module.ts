@@ -7,6 +7,7 @@ import {SingleGalleryComponent} from "./components/single-gallery/single-gallery
 import {CreateGalleryComponent} from "./components/create-gallery/create-gallery.component";
 import {AuthGuard} from "./guards/auth/auth.guard";
 import {GuestGuard} from "./guards/guest/guest.guard";
+import {EditGalleryComponent} from "./components/edit-gallery/edit-gallery.component";
 
 
 const appRoutes: Routes = [
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
     {
         path: 'gallery/:id',
         component: SingleGalleryComponent
+    },
+    {
+        path: 'edit-gallery/:id',
+        component: EditGalleryComponent
     },
     {
         path: 'author/:id',

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Gallery extends Model {
 	//
 	protected $guarded = ['id'];
+	protected $fillable = [
+		'title', 'body', 'user_id',
+	];
 
 	public static function getAllGalleries($author, $skip, $take, $search) {
 		$query = self::with('user');
@@ -31,7 +34,7 @@ class Gallery extends Model {
 		}
 
 		$count = $query->count();
-		$galleries = $query->take($take)->skip($skip)->get();
+		$galleries = $query->take($take)->skip($skip)->orderBy('id', 'desc')->get();
 
 		return compact('count', 'galleries');
 	}
@@ -52,6 +55,8 @@ class Gallery extends Model {
 			->where('user_id', $id)->get();
 
 	}
+
+
 
 	public function images() {
 		// ne pitaj šta je ovo, nešto sam se bio zainatio da se zove isto :D

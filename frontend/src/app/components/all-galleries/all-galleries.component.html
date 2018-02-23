@@ -14,12 +14,18 @@
                 {{gallery.title}}
             </a>
         </h1>
-        <div>
-            <a href="gallery/{{gallery.user_id}}">
+        <div class="image-container">
+            <a href="gallery/{{gallery.id}}">
                 <img src="{{gallery.images.url}}" alt="" class="img-fluid">
             </a>
+            <div *ngIf="auth.user.id === gallery.user.id" class="delete-gallery">
+                <i class="far fa-trash-alt text-primary" title="Delete gallery" (click)="deleteGallery(gallery)"></i>
+            </div>
+            <div *ngIf="auth.user.id === gallery.user.id" class="edit-gallery">
+                <a href="edit-gallery/{{gallery.id}}"><i class="far fa-edit text-primary" title="Edit gallery"></i></a>
+            </div>
             <br/>
-            Author: <a href="author/{{gallery.user.id}}">{{gallery.user.first_name}} {{gallery.user.last_name}}</a><br/>
+            Author: <a href="author/{{gallery.user_id}}">{{gallery.user.first_name}} {{gallery.user.last_name}}</a><br/>
             Date: {{gallery.created_at| date:'dd.MM.yyyy.'}}
         </div>
     </div>

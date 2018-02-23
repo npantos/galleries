@@ -17,6 +17,7 @@ import { SingleGalleryComponent } from './components/single-gallery/single-galle
 import { CreateGalleryComponent } from './components/create-gallery/create-gallery.component';
 import {AuthGuard} from "./guards/auth/auth.guard";
 import {GuestGuard} from "./guards/guest/guest.guard";
+import { EditGalleryComponent } from './components/edit-gallery/edit-gallery.component';
 
 
 
@@ -28,7 +29,8 @@ import {GuestGuard} from "./guards/guest/guest.guard";
         LoginComponent,
         RegisterComponent,
         SingleGalleryComponent,
-        CreateGalleryComponent
+        CreateGalleryComponent,
+        EditGalleryComponent
     ],
     imports: [
         BrowserModule,

@@ -29,6 +29,18 @@ Route::post('/comments','CommentsController@store');
 // delete comment
 Route::middleware('jwt')->delete('/comment/{id}','CommentsController@destroy');
 
+// create gallery
+Route::middleware('jwt')->post('/add-gallery','GalleryController@store');
+
+
+//delete gallery
+Route::middleware('jwt')->delete('/gallery/{id}','GalleryController@destroy');
+
+//edit gallery
+Route::middleware('jwt')->put('/edit-gallery/{id}','GalleryController@update');
+
+
+
 // TODO
 //Route::middleware('jwt')->get('/single-gallery/{id}','GalleryController@show');
 //Route::middleware('jwt')->post('/register','Auth\RegisterController@create');

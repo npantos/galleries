@@ -140,9 +140,14 @@ export class GalleriesService {
         });
     }
 
+    /**
+     * Create new gallery
+     * @param {Gallery} gallery
+     * @returns {Observable<any>}
+     */
     public create(gallery: Gallery) {
         return new Observable((o: Observer<any>) => {
-            this.http.post('http://localhost:8000/api/galleries', {
+            this.http.post('http://localhost:8000/api/add-gallery', {
                 'title': gallery.title,
                 'body': gallery.body,
                 'images': gallery.images
@@ -161,6 +166,49 @@ export class GalleriesService {
         });
     }
 
+    /**
+     * Delete gallery
+     * @param {Gallery} gallery
+     * @returns {Observable<any>}
+     */
+    public deleteGallery(gallery: Gallery){
+        return new Observable((o: Observer<any>) => {
+            this.http.delete('http://localhost:8000/api/gallery/' + gallery.id,{
+                headers: this.authService.getRequestHeaders()
+            }).subscribe(
+                () => {
+                    const index = this.galleries.indexOf(gallery);
+                    this.galleries.splice(index, 1);
+
+                    o.next(index);
+                    return o.complete();
+                }
+            );
+        });
+    }
+
+
+
+    public editGallery(gallery: Gallery) {
+        return new Observable((o: Observer<any>) => {
+            this.http.put('http://localhost:8000/api/edit-gallery/' + gallery.id, {
+                'title': gallery.title,
+                'body': gallery.body,
+                'images': gallery.images
+            }, {
+                headers: this.authService.getRequestHeaders()
+            }).subscribe(
+                (data: Gallery) => {
+                    o.next(data);
+
+                    return o.complete();
+                },
+                (err) => {
+                    return o.error(err);
+                }
+            );
+        });
+    }
 
 
 

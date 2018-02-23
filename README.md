@@ -44,24 +44,24 @@ Nije potrebno uraditi funkcionalnosti koje nisu opisane ovim dokumentom. Fokus r
 
 ~~Kao korisnik na vrhu home stranice vidim input polje preko kojeg mogu da filtriram galerije. Kada ukucam termin i kliknem na dugme &quot;Filtriraj&quot; koje se nalazi pored, prikazuju mi samo galerije koje imaju ukucan termin u imenu, ili opisu, ili u imenu autora. Paginacija se i dalje prikazuje i klikom na &quot;load more&quot; dugme se učitava novih 10 galerija koje zadovoljavaju kriterijume filtera.~~
 
-**Create New Gallery Page**
+✔ ~~**Create New Gallery Page**~~
 
 ~~Kada kao ulogovan korisnik pristupim URL-u &quot;/create&quot;, otvara se ova stranica. Na stranici se prikazuje forma za dodavanje nove galerije gde vidim:~~
 
-- Naziv, obavezno polje, minimum 2 karaktera, maksimum 255
-- Opis, opciono polje. Maksimum 1000 karaktera
-- Lista URL-a do slika
-  - Obavezno je da se postavi barem jedan URL
-  - URL do slike postavljamo u input polje
-  - Imam mogućnost da dodajem proizvoljan broj URL-ova preko dugmeta &quot;Add another URL&quot; koji se nalazi ispod poslednjeg input polja
-  - Za svaki URL postavljamo posebno input polje
-  - Validiramo da li je upisan validan URL i da li se URL završava sa nekom image ekstenzijom (png, jpg ili jpeg)
-  - Imam mogućnost da uklonim bilo koji URL ali moram da imam barem jedan (ako ostane samo jedan input, nemoguće ga je obrisati)
-  - Pored svakog input polja imam opcije &quot;Move Up&quot; i &quot;Move Down&quot; koje pomeraju dati URL u listi
+~~- Naziv, obavezno polje, minimum 2 karaktera, maksimum 255~~
+~~- Opis, opciono polje. Maksimum 1000 karaktera~~
+~~- Lista URL-a do slika~~
+  ~~- Obavezno je da se postavi barem jedan URL~~
+  ~~- URL do slike postavljamo u input polje~~
+  ~~- Imam mogućnost da dodajem proizvoljan broj URL-ova preko dugmeta &quot;Add another URL&quot; koji se nalazi ispod poslednjeg input polja~~
+  ~~- Za svaki URL postavljamo posebno input polje~~
+  ~~- Validiramo da li je upisan validan URL i da li se URL završava sa nekom image ekstenzijom (png, jpg ili jpeg)~~
+  ~~- Imam mogućnost da uklonim bilo koji URL ali moram da imam barem jedan (ako ostane samo jedan input, nemoguće ga je obrisati)~~
+  ~~- Pored svakog input polja imam opcije &quot;Move Up&quot; i &quot;Move Down&quot; koje pomeraju dati URL u listi~`
 
-Na kraju forme imam dugme &quot;Submit&quot;. Ako su podaci neispravni, dobijam validacione poruke. Ako su podaci ispravni, galerija je dodana i preusmeren sam na stranicu &quot;My Galleries&quot;.
+~~Na kraju forme imam dugme &quot;Submit&quot;. Ako su podaci neispravni, dobijam validacione poruke. Ako su podaci ispravni, galerija je dodana i preusmeren sam na stranicu &quot;My Galleries&quot;.~~
 
-Pored dugmeta &quot;Submit&quot; imam i dugme &quot;Cancel&quot; koje me preusmerava na &quot;My Galleries&quot; stranicu.
+~~Pored dugmeta &quot;Submit&quot; imam i dugme &quot;Cancel&quot; koje me preusmerava na &quot;My Galleries&quot; stranicu.~~
 
 ✔ ~~**My Galleries Page**~~
 
@@ -87,12 +87,12 @@ Pored dugmeta &quot;Submit&quot; imam i dugme &quot;Cancel&quot; koje me preusme
 
 ~~Ako sam ulogovan korisnik, pored svakog mog komentara imam button &quot;Delete&quot; preko kojeg mogu da uklonim komentar. Klik na ovo dugme, aplikacija me najpre pita za potvrdu da li sam siguran da želim da obrišem komentar. Nakon što potvrdim, komentar treba da je automatski izbrisan iz liste komentara.~~
 
-**Edit Gallery Page**
+✔ ~~**Edit Gallery Page**~~
 
-Na View Gallery stranici, ako gledam galeriju koju sam ja kreirao, imam dugme &quot;Edit&quot;. Ovo dugme me vodi na stranicu &quot;/edit-gallery/:id&quot; kojoj mogu da pristupim samo ja (svaki autor može da pristupi editu samo svojih galerija). Na ovoj stranici se prikazuje ista forma kao za dodavanje galerije i imam iste opcije kao i tamo. Nakon uspešne izmene, preusmeren sam opet na View Gallery stranicu galerije koju sam izmenio.
+~~Na View Gallery stranici, ako gledam galeriju koju sam ja kreirao, imam dugme &quot;Edit&quot;. Ovo dugme me vodi na stranicu &quot;/edit-gallery/:id&quot; kojoj mogu da pristupim samo ja (svaki autor može da pristupi editu samo svojih galerija). Na ovoj stranici se prikazuje ista forma kao za dodavanje galerije i imam iste opcije kao i tamo. Nakon uspešne izmene, preusmeren sam opet na View Gallery stranicu galerije koju sam izmenio.~~
 
-Pored dugmeta &quot;Submit&quot; imam i dugme &quot;Cancel&quot; koje me preusmerava takođe na View Gallery stranicu.
+~~Pored dugmeta &quot;Submit&quot; imam i dugme &quot;Cancel&quot; koje me preusmerava takođe na View Gallery stranicu.~~
 
-**Delete Gallery Feature**
+✔ ~~**Delete Gallery Feature**~~
 
-Na View Gallery stranici, ako gledam galeriju koju sam kreirao, imam dugme &quot;Delete&quot;. Ovo dugme me pita da li želim da obrišem galeriju. Ako potvrdim, nakon uspešnog brisanja, preusmeren sam na My Galleries stranicu. Samo ja mogu da obrišem galerije koje sam ja kreirao.
+~~Na View Gallery stranici, ako gledam galeriju koju sam kreirao, imam dugme &quot;Delete&quot;. Ovo dugme me pita da li želim da obrišem galeriju. Ako potvrdim, nakon uspešnog brisanja, preusmeren sam na My Galleries stranicu. Samo ja mogu da obrišem galerije koje sam ja kreirao.~~

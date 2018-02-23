@@ -6,7 +6,8 @@ import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
     selector: 'app-all-galleries',
-    templateUrl: './all-galleries.component.html'
+    templateUrl: './all-galleries.component.html',
+    styleUrls: ['./all-galleries.component.scss']
 })
 export class AllGalleriesComponent implements OnInit {
 
@@ -71,6 +72,16 @@ export class AllGalleriesComponent implements OnInit {
             (err: HttpErrorResponse) => {
                 alert(`Backend returned code ${err.status} with message: ${err.error}`);
             });
+    }
+
+    deleteGallery(gallery){
+        if(confirm("Are you sure to delete?")) {
+            this.galleryService.deleteGallery(gallery).subscribe();
+        }
+    }
+
+    editGallery(){
+
     }
 
 }
