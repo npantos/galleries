@@ -8,20 +8,32 @@ class Gallery extends Model {
 	//
 	protected $guarded = ['id'];
 
-	public static function getAllGalleries($search) {
-		return self::take(10)
-			->with(['images'], function ($q) {
-				return $q->whereNotNull('url')->orderBy('order', 'asc');
-			})
-			->with('user')->whereHas('user', function ($q) use ($search) {
-				$q->where('first_name', 'like', '%' . $search . '%');
+	public static function getAllGalleries($author, $skip, $take, $search) {
+		$query = self::with('user');
 
-			})
-			->orWhere(function ($query) use ($search) {
-				$query->orWhere('title', 'like', '%' . $search . '%')
-					->orWhere('body', 'like', '%' . $search . '%');
-			})
-			->get();
+		if($author !='all'){
+			$query->where('user_id',$author);
+		}
+
+		$query->with(['images'], function ($q) {
+				return $q->whereNotNull('url')->orderBy('order', 'asc');
+			});
+
+		if(!empty($search)){
+			$query->where(function ($q) use ($search) {
+				$q->where('title', 'like', '%' . $search . '%')
+					->orWhere('body', 'like', '%' . $search . '%')
+					->orWhereHas('user', function($q) use ($search) {
+						$q->where('first_name', 'like', '%' . $search . '%')
+							->orWhere('last_name', 'like', '%' . $search . '%');
+					});
+			});
+		}
+
+		$count = $query->count();
+		$galleries = $query->take($take)->skip($skip)->get();
+
+		return compact('count', 'galleries');
 	}
 
 	public static function getSingleGallery($id) {

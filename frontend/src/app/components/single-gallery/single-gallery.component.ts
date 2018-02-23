@@ -50,31 +50,17 @@ export class SingleGalleryComponent implements OnInit {
         delete this.comment.id;
 
         this.galleryService.addComment(this.comment).subscribe((data) => {
-            console.log(data);
-           // this.comments.push(data);
             this.comments=data;
-            console.log(this.comments);
         });
-
-
-        /*
-        .subscribe((data: any[]) => {
-          this.contact = data.find(item => item['id'] == id);
-          this.pageTitleService.setTitle("Contacts details - " + this.contact.firstName);
-        });
-         */
-
-        /*this.comment=comment;
-        this.comments.push(comment);*/
     }
 
-    /*
-    * public submit() {
-        this.movie.genres = this.genres.split(',').map(genre => genre.trim());
-        this.movieService.addMovie(this.movie).subscribe(() => {
-            this.router.navigateByUrl('/');
-        });
-    }*/
+    removeComment(comment) {
+        if(confirm("Are you sure to delete?")) {
+            this.galleryService.removeComment(comment).subscribe();
+        }
+
+    }
+
 
     ngOnInit() {
     }

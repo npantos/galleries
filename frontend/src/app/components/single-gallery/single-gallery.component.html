@@ -1,5 +1,6 @@
 <h1>{{gallery.title}}</h1>
-<em>Author: <a href="/author/{{gallery.user?.id}}">{{gallery.user?.first_name}} {{gallery.user?.last_name}}</a></em><br />
+<em>Author: <a href="/author/{{gallery.user?.id}}">{{gallery.user?.first_name}} {{gallery.user?.last_name}}</a></em>
+<br/>
 <sub>{{gallery.created_at| date:'dd.MM.yyyy.'}}</sub>
 <p>{{gallery.body}}</p>
 
@@ -23,25 +24,30 @@
     </a>
 </div>
 <h1>Comments</h1>
-<form #commentForm="ngForm" (ngSubmit)="addComment(comment);commentForm.reset()" >
-<div class="form-group">
-    <label for="content">Comments</label>
-    <textarea class="form-control" id="content" name="content" required min="3" [(ngModel)]="comment.content"></textarea>
-</div>
-<div class="form-group">
-       <button [disabled]="!commentForm.valid"  class="btn btn-primary">Submit</button>
-</div>
+<form #commentForm="ngForm" (ngSubmit)="addComment(comment);commentForm.reset()">
+    <div class="form-group">
+        <label for="content">Comments</label>
+        <textarea class="form-control" id="content" name="content" required min="3"
+                  [(ngModel)]="comment.content"></textarea>
+    </div>
+    <div class="form-group">
+        <button [disabled]="!commentForm.valid" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 <div *ngFor="let comment of comments.slice().reverse()" class="card border-light mb-3">
-    <div class="card-header">{{comment.user.first_name}} {{comment.user.last_name}}<span class="delete" *ngIf="auth.user.id == comment.user.id">×</span></div>
+    <div class="card-header">{{comment.user.first_name}} {{comment.user.last_name}}
+        <span *ngIf="auth.isAuthenticated">
+            <span class="delete" (click)="removeComment(comment)" *ngIf="auth.user.id == comment.user_id">×</span>
+        </span>
+    </div>
     <div class="card-body">
         <p class="card-text">{{comment.content}}</p>
     </div>
 </div>
 
 
-<div >
+<div>
 
 </div>
 

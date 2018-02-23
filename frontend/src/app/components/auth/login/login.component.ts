@@ -11,10 +11,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class LoginComponent {
     constructor(private authService: AuthService,
                 private router: Router) {
+        console.log(authService.isAuthenticated);
     }
 
     login(email, password) {
-        //console.log(this.authService.login(email, password));
         this.authService.login(email, password).subscribe(
             () => {
                 this.router.navigateByUrl('/');

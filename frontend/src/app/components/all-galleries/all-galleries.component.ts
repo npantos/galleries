@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
 import {GalleriesService} from "../../shared/services/galleries.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
     selector: 'app-all-galleries',
@@ -11,20 +12,34 @@ export class AllGalleriesComponent implements OnInit {
 
     public galleries: any[] = [];
     public term: string = "";
+    public page: number = 1;
+    private params;
+    private author: string;
 
-    constructor(public auth: AuthService, public galleryService: GalleriesService) {
+    constructor(public auth: AuthService, public galleryService: GalleriesService, public route: ActivatedRoute) {
+        this.route.params.subscribe((params: Params) => {
+            this.params = params;
+        });
     }
 
     ngOnInit() {
-        this.displayAllGalleries();
+            this.displayAllGalleries();
     }
 
     /**
-     *
+     * Display all galeries
      * @param {string} term
      */
     displayAllGalleries(term = "") {
-        this.galleryService.getAllGalleries(term).subscribe(
+
+        if(this.params.id){
+            this.author = this.params.id;
+        }
+        else{
+            this.author = 'all';
+        }
+
+        this.galleryService.getAllGalleries(this.author ,this.page, term).subscribe(
             data => {
                 this.galleries = data;
             },
@@ -34,11 +49,28 @@ export class AllGalleriesComponent implements OnInit {
         );
     }
 
+
     /**
-     *
+     * Search gallery
      * @param term
      */
     search(term) {
+        this.page=1;
         this.displayAllGalleries(term);
     }
+
+    /**
+     * Load more results
+     */
+    loadMore() {
+        this.page++;
+        this.galleryService.getAllGalleries('all',this.page, this.term).subscribe(
+            (galleries) => {
+                this.galleries = this.galleries.concat(galleries);
+            },
+            (err: HttpErrorResponse) => {
+                alert(`Backend returned code ${err.status} with message: ${err.error}`);
+            });
+    }
+
 }

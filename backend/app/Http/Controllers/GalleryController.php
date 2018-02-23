@@ -13,9 +13,10 @@ class GalleryController extends Controller
 	 * @param null $search
 	 * @return mixed
      */
-    public function index($search = null)
+    public function index($author, $page = 1, $search = null)
     {
-        return Gallery::getAllGalleries($search);
+
+    	return Gallery::getAllGalleries($author,($page - 1) * 10, 10, $search);
     }
 
     /**

@@ -87,6 +87,9 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+		$contact = Comment::find($id);
+		$contact->delete();
+
+		return Comment::all();
     }
 }

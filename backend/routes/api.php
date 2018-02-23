@@ -20,11 +20,15 @@ use Illuminate\Http\Request;
 // login
 Route::post('/login','Auth\LoginController@authenticate');
 Route::post('/register','Auth\RegisterController@create');
-Route::get('/all-galleries/{search?}','GalleryController@index');
+Route::get('/all-galleries/{author}/{page?}/{search?}','GalleryController@index');
 Route::get('/single-gallery/{id}','GalleryController@show');
 Route::get('/author/{id}','GalleryController@showAuthor');
 Route::get('/comments/{id}','CommentsController@show');
 Route::post('/comments','CommentsController@store');
+
+// delete comment
+Route::middleware('jwt')->delete('/comment/{id}','CommentsController@destroy');
+
 // TODO
 //Route::middleware('jwt')->get('/single-gallery/{id}','GalleryController@show');
 //Route::middleware('jwt')->post('/register','Auth\RegisterController@create');

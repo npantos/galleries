@@ -10,12 +10,11 @@ import {User} from "../../models/user";
 export class AuthService {
 
     public isAuthenticated:boolean;
-    public user;
+    public user: User;
 
 
     constructor(private http: HttpClient, private router: Router) {
         this.isAuthenticated = !!window.localStorage.getItem('loginToken');
-        this.isAuthenticated = true;
         this.user = JSON.parse(window.localStorage.getItem('user'));
 
     }
@@ -32,10 +31,7 @@ export class AuthService {
             }).subscribe((data: { token: string, user: User }) => {
                 window.localStorage.setItem('loginToken', data.token);
                 window.localStorage.setItem('user', JSON.stringify(data.user));
-
-                this.user = data.user;
-                console.log("this user: ");
-                console.log(this.user);
+                this.user = new User(data.user.id,data.user.first_name,data.user.last_name);
                 this.isAuthenticated = true;
                 o.next(data.token);
                 return o.complete();
@@ -46,7 +42,6 @@ export class AuthService {
     }
 
     register(first_name: string, last_name:string, email: string, password: string) {
-        console.log(first_name+last_name+email+password);
         return new Observable((o: Observer<any>) => {
             this.http.post('http://localhost:8000/api/register', {
                 'first_name': first_name,
@@ -65,7 +60,6 @@ export class AuthService {
     logout(){
         window.localStorage.removeItem('loginToken');
         window.localStorage.removeItem('user');
-
         this.isAuthenticated = false;
         this.router.navigateByUrl('/login');
     }

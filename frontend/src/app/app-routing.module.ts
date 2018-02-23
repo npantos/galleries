@@ -4,8 +4,9 @@ import {AllGalleriesComponent} from "./components/all-galleries/all-galleries.co
 import {LoginComponent} from "./components/auth/login/login.component";
 import {RegisterComponent} from "./components/auth/register/register.component";
 import {SingleGalleryComponent} from "./components/single-gallery/single-gallery.component";
-import {AuthorGalleriesComponent} from "./components/author-galleries/author-galleries.component";
 import {CreateGalleryComponent} from "./components/create-gallery/create-gallery.component";
+import {AuthGuard} from "./guards/auth/auth.guard";
+import {GuestGuard} from "./guards/guest/guest.guard";
 
 
 const appRoutes: Routes = [
@@ -24,18 +25,22 @@ const appRoutes: Routes = [
     },
     {
         path: 'author/:id',
-        component: AuthorGalleriesComponent
+        canActivate: [AuthGuard],
+        component: AllGalleriesComponent
     },
     {
         path: 'login',
+        canActivate: [GuestGuard],
         component: LoginComponent
     },
     {
         path: 'register',
+        canActivate: [GuestGuard],
         component: RegisterComponent
     },
     {
         path: 'create',
+        canActivate: [AuthGuard],
         component: CreateGalleryComponent
     },
 ];
