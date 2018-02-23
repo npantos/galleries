@@ -33,30 +33,9 @@ export class GalleriesService {
                 headers: this.authService.getRequestHeaders()
             }).subscribe((data: { count: number, galleries: any[] }) => {
                 data.galleries.forEach((c) => {
-                    this.galleries.push(new Gallery(c.id, c.title, c.body, c.created_at, c.user_id, c.user, c.images));
+                    this.galleries.push(new Gallery(c));
                 });
                 this.count = data.count;
-                o.next(this.galleries);
-                return o.complete();
-            });
-        });
-    }
-
-    /**
-     *
-     * @param id
-     * @returns {Observable<any>}
-     */
-    public getAuthorGalleries(id) {
-        this.galleries = [];
-        return new Observable((o: Observer<any>) => {
-            this.http.get('http://localhost:8000/api/author/' + id, {
-                headers: this.authService.getRequestHeaders()
-            }).subscribe((galleries: any[]) => {
-                galleries.forEach((c) => {
-                    this.galleries.push(new Gallery(c.id, c.title, c.body, c.created_at, c.user_id, c.user, c.images));
-                });
-
                 o.next(this.galleries);
                 return o.complete();
             });
@@ -140,6 +119,11 @@ export class GalleriesService {
         });
     }
 
+    /**
+     * Remove comment from gallery
+     * @param {Comment} comment
+     * @returns {Observable<any>}
+     */
     public removeComment(comment: Comment){
         return new Observable((o: Observer<any>) => {
             this.http.delete('http://localhost:8000/api/comment/' + comment.id,{
@@ -155,6 +139,28 @@ export class GalleriesService {
             );
         });
     }
+
+    public create(gallery: Gallery) {
+        return new Observable((o: Observer<any>) => {
+            this.http.post('http://localhost:8000/api/galleries', {
+                'title': gallery.title,
+                'body': gallery.body,
+                'images': gallery.images
+            }, {
+                headers: this.authService.getRequestHeaders()
+            }).subscribe(
+                (data: Gallery) => {
+                    o.next(data);
+
+                    return o.complete();
+                },
+                (err) => {
+                    return o.error(err);
+                }
+            );
+        });
+    }
+
 
 
 

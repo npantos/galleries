@@ -1,12 +1,24 @@
-export class Gallery {
-    constructor(
-        public id?: number,
-        public title?: string,
-        public body?: string,
-        public created_at?: any,
-        public user_id?:number,
-        public user?:any,
-        public images?: any
+import { Image } from './image';
+import { User } from './user';
 
-    ) {}
+export class Gallery {
+    public id: '';
+    public title = '';
+    public body = '';
+    public user = new User();
+    public created_at = '';
+    public user_id = '';
+    public images: Image[] = [new Image()];
+
+    constructor(data ?: {
+        id ?: number,
+        title ?: string,
+        body ?: string,
+        user ?: User,
+        created_at ?: Date,
+        user_id ?: number,
+        images ?: Image[]
+    }) {
+        Object.assign(this, data || {});
+    }
 }

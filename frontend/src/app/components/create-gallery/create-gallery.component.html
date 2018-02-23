@@ -1,15 +1,89 @@
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 <h1 class="mb-5">Create Gallery</h1>
-<form #createGalleryForm="ngForm" (ngSubmit)="create(first_name.value, last_name.value, email.value, password.value)">
-  <div class="form-group">
-    <label>Title</label>
-    <input #title name='title' min="2" max="255" type="text" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Body</label>
-    <textarea  #body name='body' max="1000" class="form-control"></textarea>
-  </div>
-  <div class="form-group">
-    <label>Image url</label>
-    <input #image name='image' type="text" class="form-control"><button class="btn btn-primary">+</button>
-  </div>
+<form #createGalleryForm="ngForm" (ngSubmit)="create()">
+    <div class="form-group">
 
+        <label for="title">
+            Title
+        </label>
+
+        <input #title="ngModel" [(ngModel)]="gallery.title" type="text" required minlength="2" maxlength="255"
+               class="form-control" id="title" name="title">
+
+        <div *ngIf="title?.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+            <div *ngIf="title?.errors.required">
+                Title is required.
+            </div>
+            <div *ngIf="title?.errors.minlength">
+                Title must be at least 4 characters long.
+            </div>
+        </div>
+        <div *ngIf="gallery.title.length === 255" class="alert alert-info">
+            <div>
+                Title must be at most 255 characters long.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label for="body">
+            Description
+        </label>
+
+        <textarea #body="ngModel" [(ngModel)]="gallery.body" type="text" maxlength="1000" class="form-control" id="body"
+                  name="body"></textarea>
+
+        <div *ngIf="(body.dirty || body.touched) && gallery.body.length === 1000" class="alert alert-danger">
+            <div>
+                Name must be at most 1000 characters long.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group" *ngFor="let image of gallery.images; trackBy: setOrder;">
+
+        <div class="input-group">
+
+            <span class="input-group-addon">{{ image.order }}</span>
+
+            <input #url="ngModel" [(ngModel)]="image.url" type="text"
+                   required pattern="(http)?s?:?(\/\/[^']*\.(?:png|jpg|jpeg))"
+                   class="form-control" [ngModelOptions]="{standalone: true}">
+
+            <span class="input-group-btn" *ngIf="gallery.images.length > 1">
+        <a class="btn btn-default" type="button" (click)="moveImageUp(image);"><i class="fas fa-caret-up"></i></a>
+      </span>
+
+            <span class="input-group-btn" *ngIf="gallery.images.length > 1">
+        <a class="btn btn-default" type="button" (click)="moveImageDown(image);"><i class="fas fa-caret-down"></i></a>
+      </span>
+
+            <span class="input-group-btn" *ngIf="gallery.images.length > 1">
+        <a class="btn btn-danger" type="button" (click)="removeImage(image);"><i class="far fa-trash-alt"></i></a>
+      </span>
+
+        </div>
+
+        <div *ngIf="url.invalid || url.pristine" class="alert alert-info">
+
+            <div>
+                Provide valid URL with extension .jpg, .jpeg or .png.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <a class="btn btn-primary btn-block" (click)="addNewImage();">
+        Add new image
+    </a>
+
+    <br>
+
+    <button type="submit" [disabled]="!createGalleryForm.valid"
+            class="btn btn-success btn-block">Create
+    </button>
+
+</form>
