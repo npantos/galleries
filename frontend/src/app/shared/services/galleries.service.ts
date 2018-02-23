@@ -23,10 +23,10 @@ export class GalleriesService {
      *
      * @returns {Observable<any>}
      */
-    public getAllGalleries() {
+    public getAllGalleries(term) {
         this.galleries = [];
         return new Observable((o: Observer<any>) => {
-            this.http.get('http://localhost:8000/api/all-galleries', {
+            this.http.get('http://localhost:8000/api/all-galleries/'+term, {
                 headers: this.authService.getRequestHeaders()
             }).subscribe((galleries: any[]) => {
                 galleries.forEach((c) => {

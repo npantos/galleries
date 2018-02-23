@@ -9,12 +9,13 @@ class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+	 *
+	 * @param null $search
+	 * @return mixed
      */
-    public function index()
+    public function index($search = null)
     {
-        return Gallery::getAllGalleries();
+        return Gallery::getAllGalleries($search);
     }
 
     /**
