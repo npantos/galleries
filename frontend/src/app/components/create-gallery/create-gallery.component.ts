@@ -19,6 +19,8 @@ export class CreateGalleryComponent implements OnInit {
     ) {
     }
 
+
+
     create() {
 
         this.galleryService.create(this.gallery)
@@ -39,6 +41,8 @@ export class CreateGalleryComponent implements OnInit {
 
     ngOnInit() {
     }
+
+
 
     public addNewImage() {
         this.gallery.images.push(new Image());

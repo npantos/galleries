@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 
 // login
 Route::post('/login','Auth\LoginController@authenticate');
@@ -24,7 +21,9 @@ Route::get('/all-galleries/{author}/{page?}/{search?}','GalleryController@index'
 Route::get('/single-gallery/{id}','GalleryController@show');
 Route::get('/author/{id}','GalleryController@showAuthor');
 Route::get('/comments/{id}','CommentsController@show');
-Route::post('/comments','CommentsController@store');
+
+// comment save
+Route::middleware('jwt')->post('/comments','CommentsController@store');
 
 // delete comment
 Route::middleware('jwt')->delete('/comment/{id}','CommentsController@destroy');
@@ -40,7 +39,3 @@ Route::middleware('jwt')->delete('/gallery/{id}','GalleryController@destroy');
 Route::middleware('jwt')->put('/edit-gallery/{id}','GalleryController@update');
 
 
-
-// TODO
-//Route::middleware('jwt')->get('/single-gallery/{id}','GalleryController@show');
-//Route::middleware('jwt')->post('/register','Auth\RegisterController@create');

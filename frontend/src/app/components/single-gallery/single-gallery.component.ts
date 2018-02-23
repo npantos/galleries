@@ -8,7 +8,7 @@ import {Comment} from "../../models/comment";
 @Component({
     selector: 'app-single-gallery',
     templateUrl: './single-gallery.component.html',
-    styleUrls: ['./single-gallery.component.css']
+    styleUrls: ['./single-gallery.component.scss']
 })
 export class SingleGalleryComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class SingleGalleryComponent implements OnInit {
     public comment: Comment = new Comment();
     private params;
 
-    constructor(public auth: AuthService, public galleryService: GalleriesService, public route: ActivatedRoute, router: Router) {
+    constructor(public auth: AuthService, public galleryService: GalleriesService, public route: ActivatedRoute, public router: Router) {
 
         this.route.params.subscribe((params: Params) => {
             this.params = params;
@@ -61,6 +61,13 @@ export class SingleGalleryComponent implements OnInit {
 
     }
 
+    deleteGallery(gallery){
+        if(confirm("Are you sure to delete?")) {
+            this.galleryService.deleteGallery(gallery).subscribe(
+                () => this.router.navigateByUrl('/')
+            );
+        }
+    }
 
     ngOnInit() {
     }
