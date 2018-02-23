@@ -25,5 +25,6 @@ Route::get('/single-gallery/{id}','GalleryController@show');
 Route::get('/author/{id}','GalleryController@showAuthor');
 Route::get('/comments/{id}','CommentsController@show');
 Route::post('/comments','CommentsController@store');
+// TODO
 //Route::middleware('jwt')->get('/single-gallery/{id}','GalleryController@show');
 //Route::middleware('jwt')->post('/register','Auth\RegisterController@create');
