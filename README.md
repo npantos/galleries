@@ -1,6 +1,12 @@
 # Završni zadatak - Galerija
 ![zavrsni](https://usnimi.me/slike/2018/02/23/Selection001.png)
 
+![zavrsni](https://usnimi.me/slike/2018/02/23/Selection002.png)
+
+![zavrsni](https://usnimi.me/slike/2018/02/23/Selection003.png)
+
+![zavrsni](https://usnimi.me/slike/2018/02/23/Selection004.png)
+
 
 Zadatak je da se napravi aplikacija Galleries. Ova aplikacija služi za kreiranje galerija slika od strane registrovanih korisnika.
 
