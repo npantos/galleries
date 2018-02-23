@@ -1,9 +1,9 @@
 <h1>{{gallery.title}}</h1>
 <div class="controls">
-    <div *ngIf="auth.user.id === gallery.user.id" class="delete-gallery">
+    <div *ngIf="auth.user.id === gallery.user?.id" class="delete-gallery">
         <i class="far fa-trash-alt text-primary" title="Delete gallery" (click)="deleteGallery(gallery)"></i>
     </div>
-    <div *ngIf="auth.user.id === gallery.user.id" class="edit-gallery">
+    <div *ngIf="auth.user.id === gallery.user?.id" class="edit-gallery">
         <a href="edit-gallery/{{gallery.id}}"><i class="far fa-edit text-primary" title="Edit gallery"></i></a>
     </div>
 </div>
@@ -35,7 +35,7 @@
 <form #commentForm="ngForm" (ngSubmit)="addComment(comment);commentForm.reset()">
     <div class="form-group">
         <label for="content">Comments</label>
-        <textarea class="form-control" id="content" name="content" required min="3"
+        <textarea class="form-control" id="content" name="content" required maxlength="1000" min="3"
                   [(ngModel)]="comment.content"></textarea>
     </div>
     <div class="form-group">
